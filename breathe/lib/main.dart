@@ -1,8 +1,10 @@
-import 'package:breathe/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:breathe/widgets/category_card.dart';
+import 'package:breathe/widgets/bottom_nav_bar.dart';
 
-import 'constants.dart';
+import 'package:breathe/screens/details_screen.dart';
+
 import 'constants.dart';
 
 void main() {
@@ -32,6 +34,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      bottomNavigationBar: BottomNavBar(),
       body: Stack(
         children: <Widget>[
           Container(
@@ -95,7 +98,14 @@ class HomeScreen extends StatelessWidget {
                         CategoryCards(
                           title: "Meditação",
                           svgSrc: "assets/icons/Meditation.svg",
-                          press: () {},
+                          press: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return DetailsScreen();
+                              }),
+                            );
+                          },
                         ),
                         CategoryCards(
                           title: "Exercitando o Corpo",
@@ -120,60 +130,6 @@ class HomeScreen extends StatelessWidget {
             ),
           )
         ],
-      ),
-    );
-  }
-}
-
-class CategoryCards extends StatelessWidget {
-  final String svgSrc;
-  final String title;
-  final Function press;
-  const CategoryCards({Key key, this.svgSrc, this.title, this.press})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(13),
-      child: Container(
-        // padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(13),
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(0, 17),
-              blurRadius: 17,
-              spreadRadius: -23,
-              color: kShadowColor,
-            ),
-          ],
-        ),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: press,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: <Widget>[
-                  Spacer(),
-                  SvgPicture.asset(svgSrc),
-                  Spacer(),
-                  Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .title
-                        .copyWith(fontSize: 15),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
       ),
     );
   }
