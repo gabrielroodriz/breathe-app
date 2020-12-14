@@ -8,6 +8,9 @@
       <excludeFolder url="file://$MODULE_DIR$/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/breathe/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/breathe/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/breathe/build" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />

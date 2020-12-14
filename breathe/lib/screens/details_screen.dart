@@ -45,7 +45,7 @@ class DetailsScreen extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      "3-10 Min Course",
+                      "3-10 Min de duração",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
@@ -54,7 +54,7 @@ class DetailsScreen extends StatelessWidget {
                     SizedBox(
                       width: size.width * .6,
                       child: Text(
-                        "Live happier and healthier by learning the fundamentals of meditation and mindfulness",
+                        "Viver mais feliz e mais saudável, aprendendo os fundamentos da meditação e da atenção",
                       ),
                     ),
                     SizedBox(
@@ -132,10 +132,10 @@ class DetailsScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  "Basic 2",
+                                  "Básico 2",
                                   style: Theme.of(context).textTheme.subtitle1,
                                 ),
-                                Text("Start your deepen you practice")
+                                Text("Comece a sua prática de aprofundamento")
                               ],
                             ),
                           ),
