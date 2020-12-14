@@ -1,3 +1,4 @@
+import 'package:breathe/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,13 +19,21 @@ class BottomNavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           BottomNavItem(
-            title: "Hoje",
-            svgScr: "assets/icons/calendar.svg",
-          ),
-          BottomNavItem(
             title: "Exercícios",
             svgScr: "assets/icons/gym.svg",
+          ),
+          BottomNavItem(
+            title: "Hoje",
+            svgScr: "assets/icons/calendar.svg",
             isActivate: true,
+            press: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return HomeScreen();
+                }),
+              );
+            },
           ),
           BottomNavItem(
             title: "Config",
