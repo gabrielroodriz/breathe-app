@@ -1,3 +1,5 @@
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:breathe/widgets/bottom_nav_bar.dart';
 import 'package:breathe/widgets/search-bar.dart';
 import 'package:flutter/material.dart';
@@ -68,6 +70,7 @@ class DetailsScreen extends StatelessWidget {
                         SeassonCard(
                           seassionNum: 1,
                           isDone: true,
+                          srcSound: "assets/sounds/music.mp3",
                           press: () {},
                         ),
                         SeassonCard(
@@ -155,16 +158,68 @@ class DetailsScreen extends StatelessWidget {
   }
 }
 
-class SeassonCard extends StatelessWidget {
+class SeassonCard extends StatefulWidget {
   final int seassionNum;
   final bool isDone;
   final Function press;
+  final String srcSound;
   const SeassonCard({
     Key key,
     this.seassionNum,
     this.isDone = false,
     this.press,
+    this.srcSound,
   }) : super(key: key);
+
+  @override
+  _SeassonCardState createState() => _SeassonCardState();
+}
+
+class _SeassonCardState extends State<SeassonCard> {
+  bool playing = false;
+  IconData playBtn = Icons.play_arrow;
+
+  AudioPlayer _player;
+  AudioCache cache;
+
+  Duration position = new Duration();
+  Duration musicLength = new Duration();
+
+  Widget slider() {
+    return Slider.adaptive(
+        activeColor: kBlueColor,
+        inactiveColor: kBlueLightColor,
+        value: position.inSeconds.toDouble(),
+        max: musicLength.inSeconds.toDouble(),
+        onChanged: (value) {
+          seekToSec(value.toInt());
+        });
+  }
+
+  void seekToSec(int sec) {
+    Duration newPos = Duration(seconds: sec);
+    _player.seek(newPos);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _player = AudioPlayer();
+    cache = AudioCache(fixedPlayer: _player);
+
+    _player.durationHandler = (d) {
+      setState(() {
+        musicLength = d;
+      });
+    };
+
+    _player.positionHandler = (p) {
+      setState(() {
+        position = p;
+      });
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -188,7 +243,22 @@ class SeassonCard extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: press,
+              onTap: () {
+                if (!playing) {
+                  setState(() {
+                    cache.load("sounds/music.mp3");
+                    cache.play("sounds/music.mp3");
+                    playBtn = Icons.pause;
+                    playing = true;
+                  });
+                } else {
+                  setState(() {
+                    _player.pause();
+                    playBtn = Icons.play_arrow;
+                    playing = false;
+                  });
+                }
+              },
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
@@ -197,22 +267,22 @@ class SeassonCard extends StatelessWidget {
                       height: 42,
                       width: 43,
                       decoration: BoxDecoration(
-                        color: isDone ? kBlueColor : Colors.white,
+                        color: widget.isDone ? kBlueColor : Colors.white,
                         shape: BoxShape.circle,
                         border: Border.all(color: kBlueColor),
                       ),
                       child: Icon(
-                        Icons.play_arrow,
-                        color: isDone ? Colors.white : kBlueColor,
+                        playBtn,
+                        color: widget.isDone ? Colors.white : kBlueColor,
                       ),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     Text(
-                      "Passo $seassionNum",
+                      "Passo ${widget.seassionNum}",
                       style: Theme.of(context).textTheme.subtitle1,
-                    )
+                    ),
                   ],
                 ),
               ),
