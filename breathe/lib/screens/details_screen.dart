@@ -70,7 +70,7 @@ class DetailsScreen extends StatelessWidget {
                         SeassonCard(
                           seassionNum: 1,
                           isDone: true,
-                          srcSound: "assets/sounds/music.mp3",
+                          srcSound: "sounds/music.mp3",
                           press: () {},
                         ),
                         SeassonCard(
@@ -246,8 +246,8 @@ class _SeassonCardState extends State<SeassonCard> {
               onTap: () {
                 if (!playing) {
                   setState(() {
-                    cache.load("sounds/music.mp3");
-                    cache.play("sounds/music.mp3");
+                    cache.load(widget.srcSound);
+                    cache.play(widget.srcSound);
                     playBtn = Icons.pause;
                     playing = true;
                   });
