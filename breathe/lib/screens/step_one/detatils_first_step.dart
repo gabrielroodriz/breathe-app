@@ -1,15 +1,16 @@
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:breathe/screens/step_one/detatils_first_step.dart';
+import 'package:breathe/screens/step_one/player_step_one_introduction.dart';
 import 'package:breathe/widgets/bottom_nav_bar.dart';
+import 'package:breathe/widgets/card_module.dart';
 import 'package:breathe/widgets/search-bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 
-class DetailsScreen extends StatelessWidget {
+class DetailsScreenFirstStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -20,7 +21,7 @@ class DetailsScreen extends StatelessWidget {
             Container(
               height: size.height * .45,
               decoration: BoxDecoration(
-                color: kBlueLightColor,
+                color: Color(0xFFe5989b),
                 image: DecorationImage(
                   image: AssetImage("assets/images/meditation_bg.png"),
                   fit: BoxFit.fitWidth,
@@ -38,7 +39,7 @@ class DetailsScreen extends StatelessWidget {
                       height: size.height * 0.05,
                     ),
                     Text(
-                      'Meditação',
+                      'Acalmando as Ondas',
                       style: Theme.of(context)
                           .textTheme
                           .display1
@@ -48,7 +49,7 @@ class DetailsScreen extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      "3-10 Min de duração",
+                      "10 - 20 Min de duração",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
@@ -57,46 +58,15 @@ class DetailsScreen extends StatelessWidget {
                     SizedBox(
                       width: size.width * .6,
                       child: Text(
-                        "Viver mais feliz e mais saudável, aprendendo os fundamentos da meditação e da atenção",
+                        "Os primeiros passos nas práticas de treinamento da mente.",
                       ),
                     ),
                     SizedBox(
                       width: size.width * 0.5,
                       child: SearchBar(),
                     ),
-                    Wrap(
-                      spacing: 20,
-                      runSpacing: 20,
-                      children: <Widget>[
-                        SeassonCard(
-                          seassionNum: 1,
-                          press: () {},
-                          srcScreen: DetailsScreenFirstStep(),
-                        ),
-                        SeassonCard(
-                          seassionNum: 2,
-                          press: () {},
-                        ),
-                        SeassonCard(
-                          seassionNum: 3,
-                          press: () {},
-                        ),
-                        SeassonCard(
-                          seassionNum: 4,
-                          press: () {},
-                        ),
-                        SeassonCard(
-                          seassionNum: 5,
-                          press: () {},
-                        ),
-                        SeassonCard(
-                          seassionNum: 6,
-                          press: () {},
-                        )
-                      ],
-                    ),
                     SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
                     Text(
                       "Meditação",
@@ -105,49 +75,14 @@ class DetailsScreen extends StatelessWidget {
                           .title
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 20),
-                      padding: EdgeInsets.all(10),
-                      height: 90,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(13),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(0, 17),
-                            blurRadius: 23,
-                            spreadRadius: -13,
-                            color: kShadowColor,
-                          )
-                        ],
-                      ),
-                      child: Row(
-                        children: <Widget>[
-                          SvgPicture.asset(
-                            "assets/icons/Meditation_women_small.svg",
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  "Básico 2",
-                                  style: Theme.of(context).textTheme.subtitle1,
-                                ),
-                                Text("Comece a sua prática de aprofundamento")
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                            child: SvgPicture.asset("assets/icons/Lock.svg"),
-                          )
-                        ],
-                      ),
+                    CardModule(
+                      title: 'Intrudoção',
+                      description: 'Explicação sobre as práticas',
+                      srcScreen: PlayerFirstStepIntroduction(),
+                    ),
+                    CardModule(
+                      title: 'Prática de relaxamento',
+                      description: 'Relaxando o corpo e a mente',
                     )
                   ],
                 ),
@@ -160,13 +95,15 @@ class DetailsScreen extends StatelessWidget {
 
 class SeassonCard extends StatefulWidget {
   final int seassionNum;
+  final bool isDone;
   final Function press;
-  final Widget srcScreen;
+  final String srcSound;
   const SeassonCard({
     Key key,
     this.seassionNum,
+    this.isDone = false,
     this.press,
-    this.srcScreen,
+    this.srcSound,
   }) : super(key: key);
 
   @override
@@ -175,8 +112,6 @@ class SeassonCard extends StatefulWidget {
 
 class _SeassonCardState extends State<SeassonCard> {
   bool playing = false;
-  bool isDone = false;
-
   IconData playBtn = Icons.play_arrow;
 
   AudioPlayer _player;
@@ -244,18 +179,20 @@ class _SeassonCardState extends State<SeassonCard> {
             color: Colors.transparent,
             child: InkWell(
               onTap: () {
-                setState(() {
-                  isDone = true;
-                  playBtn = Icons.pause;
-                  playing = true;
-                });
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return widget.srcScreen;
-                  }),
-                );
+                if (!playing) {
+                  setState(() {
+                    cache.load(widget.srcSound);
+                    cache.play(widget.srcSound);
+                    playBtn = Icons.pause;
+                    playing = true;
+                  });
+                } else {
+                  setState(() {
+                    _player.pause();
+                    playBtn = Icons.play_arrow;
+                    playing = false;
+                  });
+                }
               },
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -265,13 +202,13 @@ class _SeassonCardState extends State<SeassonCard> {
                       height: 42,
                       width: 43,
                       decoration: BoxDecoration(
-                        color: isDone ? kBlueColor : Colors.white,
+                        color: widget.isDone ? kBlueColor : Colors.white,
                         shape: BoxShape.circle,
                         border: Border.all(color: kBlueColor),
                       ),
                       child: Icon(
                         playBtn,
-                        color: isDone ? Colors.white : kBlueColor,
+                        color: widget.isDone ? Colors.white : kBlueColor,
                       ),
                     ),
                     SizedBox(
