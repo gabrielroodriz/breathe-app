@@ -1,24 +1,18 @@
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:breathe/screens/step_eight/detatils_eight_step.dart';
-import 'package:breathe/screens/step_five/detatils_five_step.dart';
-import 'package:breathe/screens/step_four/detatils_four_step.dart';
-import 'package:breathe/screens/step_nine/detatils_nine_step.dart';
-import 'package:breathe/screens/step_one/detatils_first_step.dart';
-import 'package:breathe/screens/step_seven/detatils_seven_step.dart';
-import 'package:breathe/screens/step_six/detatils_six_step.dart';
-import 'package:breathe/screens/step_ten/detatils_ten_step.dart';
-import 'package:breathe/screens/step_three/detatils_three_step.dart';
-import 'package:breathe/screens/step_two/detatils_two_step.dart';
+import 'package:breathe/screens/step_four/player_step_four_introduction.dart';
+import 'package:breathe/screens/step_four/player_step_four_practice.dart';
+import 'package:breathe/screens/step_three/player_step_three_introduction.dart';
+import 'package:breathe/screens/step_three/player_step_three_practice.dart';
 import 'package:breathe/widgets/bottom_nav_bar.dart';
+import 'package:breathe/widgets/card_module.dart';
 import 'package:breathe/widgets/search-bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 
-class DetailsScreen extends StatelessWidget {
+class DetailsScreenFourStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -29,11 +23,11 @@ class DetailsScreen extends StatelessWidget {
             Container(
               height: size.height * .45,
               decoration: BoxDecoration(
-                color: kBlueLightColor,
+                color: Color(0xFF5390d9),
                 image: DecorationImage(
+                  image: AssetImage("assets/images/pablo-13.png"),
                   alignment: Alignment.bottomRight,
-                  image: AssetImage("assets/images/meditation_bg.png"),
-                  fit: BoxFit.contain,
+                  fit: BoxFit.fitHeight,
                 ),
               ),
             ),
@@ -48,18 +42,17 @@ class DetailsScreen extends StatelessWidget {
                       height: size.height * 0.05,
                     ),
                     Text(
-                      'Meditação',
-                      style: Theme.of(context)
-                          .textTheme
-                          .display1
-                          .copyWith(fontWeight: FontWeight.w900),
+                      'Refinando o telescópio',
+                      style: Theme.of(context).textTheme.display1.copyWith(
+                          fontWeight: FontWeight.w900, color: Colors.white),
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Text(
-                      "3-10 Min de duração",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      "10 - 20 Min de duração",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                     SizedBox(
                       height: 10,
@@ -67,69 +60,35 @@ class DetailsScreen extends StatelessWidget {
                     SizedBox(
                       width: size.width * .6,
                       child: Text(
-                        "Viver mais feliz e mais saudável, aprendendo os fundamentos da meditação e da atenção",
+                        "Continuando com o cultivo de uma mente focada.",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                     ),
                     SizedBox(
                       width: size.width * 0.5,
                       child: SearchBar(),
                     ),
-                    Wrap(
-                      spacing: 20,
-                      runSpacing: 20,
-                      children: <Widget>[
-                        SeassonCard(
-                          seassionNum: 1,
-                          press: () {},
-                          srcScreen: DetailsScreenFirstStep(),
-                        ),
-                        SeassonCard(
-                          seassionNum: 2,
-                          press: () {},
-                          srcScreen: DetailsScreenSecondStep(),
-                        ),
-                        SeassonCard(
-                          seassionNum: 3,
-                          press: () {},
-                          srcScreen: DetailsScreenThreeStep(),
-                        ),
-                        SeassonCard(
-                          seassionNum: 4,
-                          press: () {},
-                          srcScreen: DetailsScreenFourStep(),
-                        ),
-                        SeassonCard(
-                          seassionNum: 5,
-                          press: () {},
-                          srcScreen: DetailsScreenFiveStep(),
-                        ),
-                        SeassonCard(
-                          seassionNum: 6,
-                          press: () {},
-                          srcScreen: DetailsScreenSixStep(),
-                        ),
-                        SeassonCard(
-                          seassionNum: 7,
-                          press: () {},
-                          srcScreen: DetailsScreenSevenStep(),
-                        ),
-                        SeassonCard(
-                          seassionNum: 8,
-                          press: () {},
-                          srcScreen: DetailsScreenEightStep(),
-                        ),
-                        SeassonCard(
-                          seassionNum: 9,
-                          press: () {},
-                          srcScreen: DetailsScreenNineStep(),
-                        ),
-                        SeassonCard(
-                          seassionNum: 10,
-                          press: () {},
-                          srcScreen: DetailsScreenTenStep(),
-                        ),
-                      ],
+                    SizedBox(
+                      height: 50,
                     ),
+                    Text(
+                      "Meditação",
+                      style: Theme.of(context)
+                          .textTheme
+                          .title
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    CardModule(
+                      title: 'Intrudoção',
+                      description: 'Explicação sobre as práticas',
+                      srcScreen: PlayerFourStepIntroduction(),
+                    ),
+                    CardModule(
+                      title: 'Prática: Atenção plena à respiração.',
+                      description: 'Relaxando o corpo e a mente',
+                      srcScreen: PlayerFourStepPractice(),
+                    )
                   ],
                 ),
               ),
@@ -141,13 +100,15 @@ class DetailsScreen extends StatelessWidget {
 
 class SeassonCard extends StatefulWidget {
   final int seassionNum;
+  final bool isDone;
   final Function press;
-  final Widget srcScreen;
+  final String srcSound;
   const SeassonCard({
     Key key,
     this.seassionNum,
+    this.isDone = false,
     this.press,
-    this.srcScreen,
+    this.srcSound,
   }) : super(key: key);
 
   @override
@@ -156,8 +117,6 @@ class SeassonCard extends StatefulWidget {
 
 class _SeassonCardState extends State<SeassonCard> {
   bool playing = false;
-  bool isDone = false;
-
   IconData playBtn = Icons.play_arrow;
 
   AudioPlayer _player;
@@ -225,18 +184,20 @@ class _SeassonCardState extends State<SeassonCard> {
             color: Colors.transparent,
             child: InkWell(
               onTap: () {
-                setState(() {
-                  isDone = true;
-                  playBtn = Icons.pause;
-                  playing = true;
-                });
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return widget.srcScreen;
-                  }),
-                );
+                if (!playing) {
+                  setState(() {
+                    cache.load(widget.srcSound);
+                    cache.play(widget.srcSound);
+                    playBtn = Icons.pause;
+                    playing = true;
+                  });
+                } else {
+                  setState(() {
+                    _player.pause();
+                    playBtn = Icons.play_arrow;
+                    playing = false;
+                  });
+                }
               },
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -246,13 +207,13 @@ class _SeassonCardState extends State<SeassonCard> {
                       height: 42,
                       width: 43,
                       decoration: BoxDecoration(
-                        color: isDone ? kBlueColor : Colors.white,
+                        color: widget.isDone ? kBlueColor : Colors.white,
                         shape: BoxShape.circle,
                         border: Border.all(color: kBlueColor),
                       ),
                       child: Icon(
-                        Icons.play_arrow_rounded,
-                        color: isDone ? Colors.white : kBlueColor,
+                        playBtn,
+                        color: widget.isDone ? Colors.white : kBlueColor,
                       ),
                     ),
                     SizedBox(
