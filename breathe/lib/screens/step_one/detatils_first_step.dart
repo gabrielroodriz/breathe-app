@@ -7,7 +7,6 @@ import 'package:breathe/widgets/card_module.dart';
 import 'package:breathe/widgets/search-bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../constants.dart';
 

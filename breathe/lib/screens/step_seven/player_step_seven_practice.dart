@@ -119,8 +119,10 @@ class _PlayerSevenStepPracticeState extends State<PlayerSevenStepPractice> {
                                 color: Colors.white,
                                 onPressed: () {
                                   if (!playing) {
-                                    cache.load("sounds/music.mp3");
-                                    cache.play("sounds/music.mp3");
+                                    cache.load(
+                                        "sounds/Pratica_ Expandindo a mente - 07.m4a");
+                                    cache.play(
+                                        "sounds/Pratica_ Expandindo a mente - 07.m4a");
                                     setState(() {
                                       playBtn = Icons.pause_rounded;
                                       playing = true;

@@ -120,8 +120,10 @@ class _PlayerFourStepIntroductionState
                                 color: Colors.white,
                                 onPressed: () {
                                   if (!playing) {
-                                    cache.load("sounds/music.mp3");
-                                    cache.play("sounds/music.mp3");
+                                    cache.load(
+                                        "sounds/Introdução_ Refletindo sobre o telescópio.m4a");
+                                    cache.play(
+                                        "sounds/Introdução_ Refletindo sobre o telescópio.m4a");
                                     setState(() {
                                       playBtn = Icons.pause_rounded;
                                       playing = true;

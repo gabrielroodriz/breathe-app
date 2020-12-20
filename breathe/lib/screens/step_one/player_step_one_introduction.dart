@@ -120,8 +120,8 @@ class _PlayerFirstStepIntroductionState
                                 color: Colors.white,
                                 onPressed: () {
                                   if (!playing) {
-                                    cache.load("sounds/music.mp3");
-                                    cache.play("sounds/music.mp3");
+                                    cache.load("sounds/Introdução.m4a");
+                                    cache.play("sounds/Introdução.m4a");
                                     setState(() {
                                       playBtn = Icons.pause_rounded;
                                       playing = true;
