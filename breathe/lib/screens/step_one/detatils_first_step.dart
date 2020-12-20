@@ -1,6 +1,7 @@
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:breathe/screens/step_one/player_step_one_introduction.dart';
+import 'package:breathe/screens/step_one/player_step_one_practice.dart';
 import 'package:breathe/widgets/bottom_nav_bar.dart';
 import 'package:breathe/widgets/card_module.dart';
 import 'package:breathe/widgets/search-bar.dart';
@@ -83,6 +84,7 @@ class DetailsScreenFirstStep extends StatelessWidget {
                     CardModule(
                       title: 'Prática de relaxamento',
                       description: 'Relaxando o corpo e a mente',
+                      srcScreen: PlayerFirstStepPractice(),
                     )
                   ],
                 ),
