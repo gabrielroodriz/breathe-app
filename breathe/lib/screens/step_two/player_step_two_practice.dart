@@ -118,8 +118,10 @@ class _PlayerTwoStepPracticeState extends State<PlayerTwoStepPractice> {
                                 color: Colors.white,
                                 onPressed: () {
                                   if (!playing) {
-                                    cache.load("sounds/music.mp3");
-                                    cache.play("sounds/music.mp3");
+                                    cache.load(
+                                        "sounds/Prática de respiração Profunda - Passo 02.m4a");
+                                    cache.play(
+                                        "sounds/Prática de respiração Profunda - Passo 02.m4a");
                                     setState(() {
                                       playBtn = Icons.pause_rounded;
                                       playing = true;

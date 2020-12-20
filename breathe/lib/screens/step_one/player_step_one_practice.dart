@@ -119,8 +119,8 @@ class _PlayerFirstStepPracticeState extends State<PlayerFirstStepPractice> {
                                 color: Colors.white,
                                 onPressed: () {
                                   if (!playing) {
-                                    cache.load("sounds/music.mp3");
-                                    cache.play("sounds/music.mp3");
+                                    cache.load("sounds/Pratica -01.m4a");
+                                    cache.play("sounds/Pratica -01.m4a");
                                     setState(() {
                                       playBtn = Icons.pause_rounded;
                                       playing = true;

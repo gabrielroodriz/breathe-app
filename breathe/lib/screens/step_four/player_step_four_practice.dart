@@ -118,8 +118,10 @@ class _PlayerFourStepPracticeState extends State<PlayerFourStepPractice> {
                                 color: Colors.white,
                                 onPressed: () {
                                   if (!playing) {
-                                    cache.load("sounds/music.mp3");
-                                    cache.play("sounds/music.mp3");
+                                    cache.load(
+                                        "sounds/Prática_ Atenção plena à respiração - 04.m4a");
+                                    cache.play(
+                                        "sounds/Prática_ Atenção plena à respiração - 04.m4a");
                                     setState(() {
                                       playBtn = Icons.pause_rounded;
                                       playing = true;

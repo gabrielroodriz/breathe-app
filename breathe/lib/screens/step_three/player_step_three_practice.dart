@@ -119,8 +119,10 @@ class _PlayerThreeStepPracticeState extends State<PlayerThreeStepPractice> {
                                 color: Colors.white,
                                 onPressed: () {
                                   if (!playing) {
-                                    cache.load("sounds/music.mp3");
-                                    cache.play("sounds/music.mp3");
+                                    cache.load(
+                                        "sounds/Prática_ atenção plena à respiração - 03.m4a");
+                                    cache.play(
+                                        "sounds/Prática_ atenção plena à respiração - 03.m4a");
                                     setState(() {
                                       playBtn = Icons.pause_rounded;
                                       playing = true;

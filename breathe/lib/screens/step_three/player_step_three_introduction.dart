@@ -120,8 +120,10 @@ class _PlayerThreeStepIntroductionState
                                 color: Colors.white,
                                 onPressed: () {
                                   if (!playing) {
-                                    cache.load("sounds/music.mp3");
-                                    cache.play("sounds/music.mp3");
+                                    cache.load(
+                                        "sounds/Introdução - A Revolução da atenção - Passo 03.m4a");
+                                    cache.play(
+                                        "sounds/Introdução - A Revolução da atenção - Passo 03.m4a");
                                     setState(() {
                                       playBtn = Icons.pause_rounded;
                                       playing = true;
