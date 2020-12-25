@@ -36,4 +36,10 @@ Também é possível baixar a aplicação e testar no disposivo
 
 
 **Android**
-[![Captura-de-Tela-2020-12-24-a-s-21-08-43.png](https://i.postimg.cc/kGkD3BTt/Captura-de-Tela-2020-12-24-a-s-21-08-43.png)](https://postimg.cc/xN39LTD0)
+
+[![android][1]][2]
+
+[1]:  https://i.postimg.cc/dtt5LDtK/download.jpg
+[2]:  https://install.appcenter.ms/users/gabrielroodriz-gmail.com/apps/brethe/distribution_groups/public
+
+
